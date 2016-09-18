@@ -1,29 +1,29 @@
-## Create a PHP application without a framework
+## Framework kullanmadan PHP uygulama yapmak
 
-### Introduction
+### Giriş
 
-If you are new to the language, this tutorial is not for you. This tutorial is aimed at people who have grasped the basics of PHP and know a little bit about object-oriented programming.
+Eğer bu dilde yeni iseniz bu ders sizin için değil. Bu ders PHP'nin temellerini bilen ve biraz da object-oriented programlama bilgisine sahip kişileri hedeflemektedir.
 
-You should have at least heard of [SOLID](http://en.wikipedia.org/wiki/SOLID_%28object-oriented_design%29). If you are not familiar with it, now would be a good time to familiarize yourself with the principles before you start with the tutorial.
+En azından [SOLID](http://en.wikipedia.org/wiki/SOLID_%28object-oriented_design%29) kavramını duymuş olmalısınız. Eğer buna alışkın değilseniz, şuan bu dersten önce onunla ilgilenmek ve alışmak için iyi bir zaman olabilir.
 
-I saw a lot of people coming into the Stack Overflow PHP chatroom and asking if framework X is any good. Most of the time the answer was that they should just use PHP and not a framework to build their application. But many are overwhelmed by this and don't know where to start.
+Stack Overflow PHP sayfalarında bir çok insanın gelip 'şu framework iyi mi?' şeklinde soru sorduğunu gördüm. Çoğu zaman cevap uygulamaları için framework yerine sadece PHP kullanmaları şeklinde oluyor. Ama çoğu insan bunun için nereden başlaması gerektiğini bilmiyor.
 
-So my goal with this is to provide an easy resource that people can be pointed to. In most cases a framework does not make sense and writing an application from scratch with the help of some third party packages is much, much easier than some people think.
+Buradaki benim amacım insanların başlayabileceği kolay bir kaynak sağlamak. Çoğu durumda frameworkler anlamsız ve üçüncü parti paketler kullanarak sıfırdan uygulama geliştirmek çoğu insanın düşündüğünden çok çok daha kolay. 
 
-**This tutorial was written for PHP 5.5 or newer versions.** If you are using an older version, please upgrade it before you start. I recommend that you use the [current stable version](http://php.net/downloads.php).
+**Bu ders PHP 5.5 ya da daha yeni versiyonlar için yazıldı.** Eğer daha eski bir versiyon kullanıyorsanız, lütfen başlamadan önce yükseltin. [Şu anki kararlı sürümü](http://php.net/downloads.php) kullanmanızı öneriyorum.
 
-So let's get started right away with the [first part](01-front-controller.md).
+Hadi [ilk bölüm](01-front-controller.md) ile hemen başlayalım.
 
-### Parts
+### Bölümler
 
-1. [Front Controller](01-front-controller.md)
+1. [Ön Controller](01-front-controller.md)
 2. [Composer](02-composer.md)
-3. [Error Handler](03-error-handler.md)
+3. [Hata Ayıklama](03-error-handler.md)
 4. [HTTP](04-http.md)
-5. [Router](05-router.md)
-6. [Dispatching to a Class](06-dispatching-to-a-class.md)
-7. [Inversion of Control](07-inversion-of-control.md)
-8. [Dependency Injector](08-dependency-injector.md)
-9. [Templating](09-templating.md)
-10. [Dynamic Pages](10-dynamic-pages.md)
-11. [Page Menu](11-page-menu.md)
+5. [Yönlendirme](05-router.md)
+6. [Sınıflara Dağıtmak](06-dispatching-to-a-class.md)
+7. [Kontrolü Değiştirme](07-inversion-of-control.md)
+8. [Bağımlılıklar](08-dependency-injector.md)
+9. [Şablonlar](09-templating.md)
+10. [Dinamik Sayfalar](10-dynamic-pages.md)
+11. [Sayfa Menüsü](11-page-menu.md)
