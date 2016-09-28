@@ -1,16 +1,16 @@
-[<< previous](02-composer.md) | [next >>](04-http.md)
+[<< önceki](02-composer.md) | [sonraki >>](04-http.md)
 
-### Error Handler
+### Hata İşlemek
 
-An error handler allows you to customize what happens if your code results in an error.
+Hata işlemek kodlarınızda bir hata oluşursa sonuçta ne olacağına karar vermenizi sağlar.
 
-A nice error page with a lot of information for debugging goes a long way during development. So the first package for your application will take care of that.
+Hata ayıklamaya yardımcı güzel bir hata sayfası yapmak geliştirme yaparken vakit alan bir işlem. Yani kullanabileceğimiz ilk paket bunu bizim yerimize halledebilir.
 
-I like [filp/whoops](https://github.com/filp/whoops), so I will show how you can install that package for your project. If you prefer another package, feel free to install that one. This is the beauty of programming without a framework, you have total control over your project.
+Ben [filp/whoops](https://github.com/filp/whoops) aracını seviyorum, yani ben bu paketi projeniz için nasıl yükleyebileceğinizi göstereceğim. Eğer başka bir paketi tercih ediyorsanız, onu yüklemekte tamamen serbestsiniz. İşte framework kullanmadan bir şey yapmanın güzelliği burada, projeniz üzerinde tam bir kontrole sahipsiniz.
 
-An alternative package would be: [PHP-Error](https://github.com/JosephLenton/PHP-Error)
+Diğer bir alternatif paket: [PHP-Error](https://github.com/JosephLenton/PHP-Error)
 
-To install a new package, open up your `composer.json` and add the package to the require part. It should now look like this:
+Yeni bir paket yüklemek için, 'composer.json' dosyanızı açın ve require bölümüne paketinizi ekleyin. Şuna benzer bir şey olmalı:
 
 ```php
 "require": {
@@ -19,15 +19,15 @@ To install a new package, open up your `composer.json` and add the package to th
 },
 ```
 
-Now run `composer update` in your console and it will be installed.
+Şimdi 'composer update' kodunu konsolunuzda çalıştırın ve herşey yüklenmiş olacaktır.
 
-But you can't use it yet. PHP won't know where to find the files for the classes. For this you will need an autoloader, ideally a [PSR-4](http://www.php-fig.org/psr/psr-4/) autoloader. Composer already takes care of this for you, so you only have to add a `require __DIR__ . '/../vendor/autoload.php';` to your `Bootstrap.php`.
+Ama henüz kullanamazsınız. PHP dosyaları nerede bulabileceğini bilmeyecektir. Bunun için autoloader'a ihtiyacınız var, en mantıklı olanı [PSR-4](http://www.php-fig.org/psr/psr-4/) autoloader. Ama Composer zaten bizim yerimize bunu hallediyor, ve yek yapmamız gereken 'Bootstrap.php' dosyasına `require __DIR__ . '/../vendor/autoload.php';` kodunu eklemek.
 
-**Important:** Never show any errors in your production environment. A stack trace or even just a simple error message can help someone to gain access to your system. Always show a user friendly error page instead and send an email to yourself, write to a log or something similar. So only you can see the errors in the production environment.
+**Önemli:** production bölümünde herhangi bir hata göstermemelisiniz. Ayrıntılı hatalar ya da sadece basit hata mesajları bile birinin sisteminize sızmasına yardımcı olabilir. Her zaman kullanıcı odaklı hata sayfaları gösterin ve kendinize mail atmak, log tutmak veya benzeri seçenekleri kullanın. Yani production da hataları yalnızca siz görmelisiniz.
 
-For development that does not make sense though -- you want a nice error page. The solution is to have an environment switch in your code. For now you can just set it to `development`.
+Development için bilgilendirici ve güzel bir hata sayfası istiyoruz. Çözüm, nerede olduğumuza göre kodlar arasında geçiş yapmak. Şimdilik sadece 'development' olarak ayarlayabilirsiniz.
 
-Then after the error handler registration, throw an `Exception` to test if everything is working correctly. Your `Bootstrap.php` should now look similar to this:
+Hata işlemeyi hallettikten sonra, bir 'Exception' oluşturup herşeyin düzgün çalışıp çalışmadığına bakmalıyız. 'Bootstrap.php' dosyanız şuna benzer bir şekilde gözükmeli:
 
 ```php
 <?php
@@ -57,6 +57,6 @@ throw new \Exception;
 
 ```
 
-You should now see a error page with the line highlighted where you throw the exception. If not, go back and debug until you get it working. Now would also be a good time for another commit.
+Şuan satırları belirtilmiş güzel bir hata sayfasıyla karşılaşıyor olmalısınız. Eğer değilse, geri dönüp çalışana kadar hata ayıklamalısınız. Ayrıca başka bir commit yapmak için şuan iyi bir zaman.
 
-[<< previous](02-composer.md) | [next >>](04-http.md)
+[<< önceki](02-composer.md) | [sonraki >>](04-http.md)
