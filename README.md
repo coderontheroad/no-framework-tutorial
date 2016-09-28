@@ -1,14 +1,17 @@
 ## Framework kullanmadan PHP uygulama yapmak
 
+### Çevirmenin Notu
+Bu belgeyi olduğu gibi çevirmek yerine daha doğal olması ve daha anlaşılır olması için bazı cümleleri yapısal olarak değiştirerek çeviriyorum. Ama merak etmeyin orjinal yazıda verilen tüm bilgilerin eksiksiz verilmesi temel amacım. Umarım tüm PHP severlere yararlı olur.
+
 ### Giriş
 
-Eğer bu dilde yeni iseniz bu ders sizin için değil. Bu ders PHP'nin temellerini bilen ve biraz da object-oriented programlama bilgisine sahip kişileri hedeflemektedir.
+Eğer bu dile yeni başlamışsanız bu ders sizin için değil. Bu ders PHP'nin temellerini bilen ve biraz da object-oriented programlama bilgisine sahip kişileri hedeflemektedir.
 
-En azından [SOLID](http://en.wikipedia.org/wiki/SOLID_%28object-oriented_design%29) kavramını duymuş olmalısınız. Eğer buna alışkın değilseniz, şuan bu dersten önce onunla ilgilenmek ve alışmak için iyi bir zaman olabilir.
+En azından [SOLID](http://en.wikipedia.org/wiki/SOLID_%28object-oriented_design%29) kavramını duymuş olmalısınız. Eğer bu ve benzeri kavramlara alışkın değilseniz, bu dersten önce bunlarla ilgilenmek ve bunlara alışmak için şuan iyi bir zaman olabilir.
 
-Stack Overflow PHP sayfalarında bir çok insanın gelip 'şu framework iyi mi?' şeklinde soru sorduğunu gördüm. Çoğu zaman cevap uygulamaları için framework yerine sadece PHP kullanmaları şeklinde oluyor. Ama çoğu insan bunun için nereden başlaması gerektiğini bilmiyor.
+Stack Overflow'un PHP sayfalarında bir çok insanın gelip 'şu framework iyi mi?' şeklinde soru sorduğunu gördüm. Çoğu zaman cevap; uygulamaları için framework yerine sadece PHP kullanmaları şeklinde oluyor. Ama çoğu insan bunun için nereden başlaması gerektiğini bilmiyor.
 
-Buradaki benim amacım insanların başlayabileceği kolay bir kaynak sağlamak. Çoğu durumda frameworkler anlamsız ve üçüncü parti paketler kullanarak sıfırdan uygulama geliştirmek çoğu insanın düşündüğünden çok çok daha kolay. 
+Buradaki amacım insanlara başlayabileceği kolay bir kaynak sağlamak. Bir çok durumda frameworkler anlamsız, bunun yerine üçüncü parti paketler kullanarak sıfırdan uygulama geliştirmek çoğu insanın düşündüğünden çok çok daha kolay.
 
 **Bu ders PHP 5.5 ya da daha yeni versiyonlar için yazıldı.** Eğer daha eski bir versiyon kullanıyorsanız, lütfen başlamadan önce yükseltin. [Şu anki kararlı sürümü](http://php.net/downloads.php) kullanmanızı öneriyorum.
 
