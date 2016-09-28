@@ -2,9 +2,9 @@
 
 ### Ön Controller
 
-[Ön controller](http://en.wikipedia.org/wiki/Front_Controller_pattern) uygulamanıza giriş için bir tek noktadır.
+[Ön controller](http://en.wikipedia.org/wiki/Front_Controller_pattern) uygulamanıza giriş için bir tek nokta oluşturmakdır.
 
-Başlamak için, projeniz için boş bir klasör oluşturun. Aynı zamanda tüm istekleri karşılayacak bir giriş noktasına ihtiyacınız var. Bu da demek oluyor ki 'index.php' dosyasını oluşturmak zorundayız.
+Başlarken, projeniz için boş bir klasör oluşturun. Aynı zamanda tüm istekleri karşılayacak bir giriş noktasına ihtiyacınız var. Bu da demek oluyor ki 'index.php' dosyasını oluşturmak zorundayız.
 
 Bunu yapmak için genelde kullanılan yol projenin kök dizinine bir 'index.php' dosyası koymaktır. Bazı frameworkler de aynen bunu kullanır. Şimdi bunun neden yanlış olduğunu açıklayayım.
 
@@ -36,7 +36,7 @@ Public klasörünün geri kalanında diğer statik dosyalarımız (JavaScript ve
 echo 'Hello World!';
 ```
 
-Şimdi herşey doğru mu bir kontrol edelim. Konsolu açın (terminal, komut satırı vs.) ve projenizin 'public' klasörüne gidin. Bu klasördeyken `php -S localhost:8000` komutunu çalıştırın. Bu hazırda gelen websunucusunu çalıştırır ve sayfaya tarayıcınızdan `http://localhost:8000` adresine giderken ulaşabilirsiniz. Şuan 'hello world' yazısını görüyor olmalısınız.
+Şimdi herşey doğru mu bir kontrol edelim. Konsolu açın (terminal, komut satırı vs.) ve projenizin 'public' klasörüne gidin. Bu klasördeyken `php -S localhost:8000` komutunu çalıştırın. Bu PHP ile hazırda gelen websunucusunu çalıştırır ve sayfaya tarayıcınızdan `http://localhost:8000` adresine giderek ulaşabilirsiniz. Şuan 'hello world' yazısını görüyor olmalısınız.
 
 Eğer bir hata varsa, geriye gidin ve düzeltmeye çalışın. Eğer sadece boş sayfa görüyorsanız, console penceresini sunucu hatası varmı diye kontrol edebilirsiniz.
 
