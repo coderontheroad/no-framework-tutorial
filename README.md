@@ -21,7 +21,7 @@ Hadi [ilk bölüm](01-front-controller.md) ile hemen başlayalım.
 
 1. [Ön Controller](01-front-controller.md)
 2. [Composer](02-composer.md)
-3. [Hata Ayıklama](03-error-handler.md)
+3. [Hata İşlemek](03-error-handler.md)
 4. [HTTP](04-http.md)
 5. [Yönlendirme](05-router.md)
 6. [Sınıflara Dağıtmak](06-dispatching-to-a-class.md)
