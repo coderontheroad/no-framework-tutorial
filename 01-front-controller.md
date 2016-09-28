@@ -1,20 +1,20 @@
-[next >>](02-composer.md)
+[sonraki >>](02-composer.md)
 
-### Front Controller
+### Ön Controller
 
-A [front controller](http://en.wikipedia.org/wiki/Front_Controller_pattern) is a single point of entry for your application.
+[Ön controller](http://en.wikipedia.org/wiki/Front_Controller_pattern) uygulamanıza giriş için bir tek noktadır.
 
-To start, create an empty directory for your project. You also need an entry point where all requests will go to. This means you will have to create an `index.php` file.
+Başlamak için, projeniz için boş bir klasör oluşturun. Aynı zamanda tüm istekleri karşılayacak bir giriş noktasına ihtiyacınız var. Bu da demek oluyor ki 'index.php' dosyasını oluşturmak zorundayız.
 
-A common way to do this is to just put the `index.php` in the root folder of the projects. This is also how some frameworks do it. Let me explain why you should not do this.
+Bunu yapmak için genelde kullanılan yol projenin kök dizinine bir 'index.php' dosyası koymaktır. Bazı frameworkler de aynen bunu kullanır. Şimdi bunun neden yanlış olduğunu açıklayayım.
 
-The `index.php` is the starting point, so it has to be inside the web server directory. This means that the web server has access to all subdirectories. If you set things up properly, you can still prevent it from accessing your subfolders where your application files are.
+'index.php' bir başlangıç noktasıdır, yani web sunucu klasörünün içerisinde olması gerekir. Bu da demek oluyor ki web sunucusu tüm alt klasörlere ulaşabilir. Eğer gerekli ayarları yapabilirseniz, hala projeniz içerisinde bulunan alt klasörlere ulaşılmasını engelleyebilirsiniz.
 
-But sometimes things don't go according to plan. And if something goes wrong and your files are set up as above, your whole application source code could be exposed to visitors. I won't have to explain why this is not a good thing.
+Ama bazen herşey planlandığı gibi gitmez. Birşeyler ters giderse ve dosyalarınız yukarıdaki gibi ayarlanmışsa, uygulamanızın bütün kodları ziyaretçilere açık hale gelebilir. Bunun neden kötü olduğunu açıklamama gerek yok sanırım.
 
-So instead of doing that, create a folder in your project folder called `public`. This is a good time to create an `src` folder for your application, also in the project root folder.
+Sonuç olarak bunu yapmak yerine proje klasöründe 'public' isimli bir klasör oluşturun. Aynı zamanda uygulamanız için 'src' klasörünü projenizin kök dizinine oluşturmanın tam zamanı.
 
-Inside the `public` folder you can now create your `index.php`. Remember that you don't want to expose anything here, so put just the following code in there:
+'public' klasörünüzün içerisinde şimdi 'index.php' dosyasını oluşturabiliriz. Şunu aklınızdan çıkarmayın; burada hiç bir açık vermek istemezsiniz, yani sadece şu kodu koymamız yeterlidir:
 
 ```php
 <?php 
@@ -22,13 +22,13 @@ Inside the `public` folder you can now create your `index.php`. Remember that yo
 require __DIR__ . '/../src/Bootstrap.php';
 ```
 
-`__DIR__` is a [magic constant](http://php.net/manual/en/language.constants.predefined.php) that contains the path of the directory. By using it, you can make sure that the `require` always uses the same relative path to the file it is used in. Otherwise, if you call the `index.php` from a different folder it will not find the file.
+`__DIR__` klasörün yolunu tutan bir [sihirli sabittir](http://php.net/manual/tr/language.constants.predefined.php). Bunu kullanarak, 'require' fonksiyonunun her zaman aynı yolu kullanarak çalışmasını sağlayabilirsiniz. Aksi takdirde 'index.php' dosyasını başka bir klasörden çalıştırırsanız dosyayı bulamayacaktır.
 
-The `Bootstrap.php` will be the file that wires your application together. We will get to it shortly.
+'Bootstrap.php' dosyası uygulamayı bir araya getiren dosyamız olacak. Az sonra buna geleceğiz.
 
-The rest of the public folder is reserved for your public asset files (like JavaScript files and stylesheets).
+Public klasörünün geri kalanında diğer statik dosyalarımız (JavaScript ve CSS dosyaları gibi) bulunacak.
 
-Now navigate inside your `src` folder and create a new `Bootstrap.php` file with the following content:
+Şimdi 'src' klasörünün içerisine girin ve içerisine şu kodları yazarak 'Bootstrap.php' dosyasını oluşturun:
 
 ```php
 <?php 
@@ -36,10 +36,10 @@ Now navigate inside your `src` folder and create a new `Bootstrap.php` file with
 echo 'Hello World!';
 ```
 
-Now let's see if everything is set up correctly. Open up a console and navigate into your projects `public` folder. In there type `php -S localhost:8000` and press enter. This will start the built-in webserver and you can access your page in a browser with `http://localhost:8000`. You should now see the 'hello world' message.
+Şimdi herşey doğru mu bir kontrol edelim. Konsolu açın (terminal, komut satırı vs.) ve projenizin 'public' klasörüne gidin. Bu klasördeyken `php -S localhost:8000` komutunu çalıştırın. Bu hazırda gelen websunucusunu çalıştırır ve sayfaya tarayıcınızdan `http://localhost:8000` adresine giderken ulaşabilirsiniz. Şuan 'hello world' yazısını görüyor olmalısınız.
 
-If there is an error, go back and try to fix it. If you only see a blank page, check the console window where the server is running for errors.
+Eğer bir hata varsa, geriye gidin ve düzeltmeye çalışın. Eğer sadece boş sayfa görüyorsanız, console penceresini sunucu hatası varmı diye kontrol edebilirsiniz.
 
-Now would be a good time to commit your progress. If you are not already using Git, set up a repository now. This is not a Git tutorial so I won't go over the details. But using version control should be a habit, even if it is just for a tutorial project like this.
+Şimdi ilerlemeyi kayıt altına almanın tam zamanı. Eğer zaten Git kullanmıyorsanız, yeni bir repo oluşturun. Bu bir Git dersi olmadığı için detaylara girmeyeceğim. Ama versiyon kontrol sistemi kullanmak sadece öğrenmek için proje yapıyorsanız bile bir alışkanlık olmalı.
 
-[next >>](02-composer.md)
+[sonraki >>](02-composer.md)
