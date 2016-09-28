@@ -1,27 +1,27 @@
-[<< previous](01-front-controller.md) | [next >>](03-error-handler.md)
+[<< önceki](01-front-controller.md) | [sonraki >>](03-error-handler.md)
 
 ### Composer
 
-[Composer](https://getcomposer.org/) is a dependency manager for PHP.
+[Composer](https://getcomposer.org/) PHP için kullanılan bağımlılık yöneticisidir.
 
-Just because you are not using a framework does not mean you will have to reinvent the wheel every time you want to do something. With Composer, you can install third-party libraries for your application.
+Framework kullanmıyor olmanız demek, her bir şey yapmak istediğinizde amerikayı yeniden keşfetmek zorundasınız demek değildir. Composer kullanarak uygulamanız için üçüncü-parti kütüphaneleri yükleyebilirsiniz.
 
-If you don't have Composer installed already, head over to the website and install it. You can find Composer packages for your project on [Packagist](https://packagist.org/).
+Eğer Composer zaten yüklü değilse, websitesine giderek yükleyebilirsiniz. Projeniz için composer paketlerini [Packagist](https://packagist.org/) adresinde bulabilirsiniz.
 
-Create a new file in your project root folder called `composer.json`. This is the Composer configuration file that will be used to configure your project and its dependencies. It must be valid JSON or Composer will fail.
+Projenizin kök dizininde 'composer.json' isimli bir dosya oluşturun. Bu projeniz ve projenizin bağımlılıkları için kullanılan, Composer için bir ayar dosyasıdır. Bu dosya doğru yazılmış bir JSON dosyası olmalıdır, yoksa Composer hata verir.
 
-Add the following content to the file:
+Şu kodları dosyanın içerisine koyun:
 
 ```json
 {
-    "name": "Project name",
-    "description": "Your project description",
-    "keywords": ["Your keyword", "Another keyword"],
+    "name": "Proje İsmi",
+    "description": "Proje Açıklaması",
+    "keywords": ["anahtar kelime", "diğer anahtar kelime"],
     "license": "MIT",
     "authors": [
         {
-            "name": "Your Name",
-            "email": "your@email.com",
+            "name": "İsminiz",
+            "email": "isminiz@email.com",
             "role": "Creator / Main Developer"
         }
     ],
@@ -36,14 +36,14 @@ Add the following content to the file:
 }
 ```
 
-In the autoload part you can see that I am using the `Example` namespace for the project. You can use whatever fits your project there, but from now on I will always use the `Example` namespace in my examples. Just replace it with your namespace in your own code.
+autoload yazan kısıma bakarsanız, 'Example' namespace'ini kullandığımı görebilirsiniz. Burada projeniz için ne uygunsa onu kullanabilirsiniz, ama şimdiden itibaren ben her zaman 'Example' namespace'ini kullanacağım. Bunu kendi projeniz için kodlarınızda istediğiniz gibi değiştirebileceğinizi unutmayın.
 
-Open a new console window and navigate into your project root folder. There run `composer update`.
+Yeni bir konsol penceresi açın ve projenizin kök dizinine gidin. Burada 'composer update' komutunu çalıştırın.
 
-Composer creates a `composer.lock` file that locks in your dependencies and a vendor directory. 
+Composer bağımlılıklarınızı ve vendor klasörünü kilitleyen 'composer.lock' dosyası oluşturacaktır.
 
-Committing the `composer.lock` file into version control is generally good practice for projects. It allows continuation testing tools (such as [Travis CI](https://travis-ci.org/)) to run the tests against the exact same versions of libraries that you're developing against. It also allows all people who are working on the project to use the exact same version of libraries i.e. it eliminates a source of "works on my machine" problems.
+'composer.lock' dosyasını versiyon kontrolüne dahil etmek projeniz için iyi bir şeydir. Test araçlarının ([Travis CI](https://travis-ci.org/) gibi) projenizdeki kütüphanelerle aynı versiyonları kullanarak testleri çalıştırmasını sağlar. Aynı zamanda projede çalışan herkesin aynı kütüphane versiyonlarıyla çalışmasını sağlar, böylece 'benim bilgisayarımda çalışıyordu' problemleriyle karşılaşmazsınız.
 
-Now you have successfully created an empty playground which you can use to set up your project.
+Şimdi başarılı bir şekilde boş bir proje sistemi kurmuş oldunuz.
 
-[<< previous](01-front-controller.md) | [next >>](03-error-handler.md)
+[<< önceki](01-front-controller.md) | [sonraki >>](03-error-handler.md)
