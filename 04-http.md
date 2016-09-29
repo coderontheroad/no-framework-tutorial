@@ -1,18 +1,18 @@
-[<< previous](03-error-handler.md) | [next >>](05-router.md)
+[<< önceki](03-error-handler.md) | [sonraki >>](05-router.md)
 
 ### HTTP
 
-PHP already has a few things built in to make working with HTTP easier. For example there are the [superglobals](http://php.net/manual/en/language.variables.superglobals.php) that contain the request information.
+PHP, HTTP ile kolayca çalışmak için zaten hali hazırda bir çok şeyle birlikte geliyor. Örneğin [superglobals](http://php.net/manual/en/language.variables.superglobals.php) yapılan istekle ilgili bir çok bilgiyi sağlıyor.
 
-These are good if you just want to get a small script up and running without much thought on maintenance. However, if you want to write clean, maintainable, [SOLID](http://en.wikipedia.org/wiki/SOLID_%28object-oriented_design%29) code, then you will want a class with a nice object-oriented interface that you can use in your application.
+Eğer sadece ufak bir script yazmak istiyorsanız ve sürekli çalışır tutmak önemli değilse bunlar işinize yarayabilir. Fakat temiz, sürdürülebilir, [SOLID](http://en.wikipedia.org/wiki/SOLID_%28object-oriented_design%29) kod yazmak istiyorsanız, uygulamanız içinde kullanabileceğiz object-oriented ile yazılmış iyi bir sınıfa ihtiyacınız var.
 
-Once again, you don't have to reinvent the wheel and just install a package. I decided to write my own [HTTP component](https://github.com/PatrickLouys/http) because I did not like the existing components, but you don't have to do the same.
+Bir kez daha, amerikayı yeniden keşfetmek zorunda değiliz ve hazır paketlerden birini kullanabiliriz. Ben kendi [HTTP component](https://github.com/PatrickLouys/http)'imi yazdım çünkü var olan componentleri beğenmedim, ama siz bunu yapmak zorunda değilsiniz.
 
-Some alternatives: [Symfony HttpFoundation](https://github.com/symfony/HttpFoundation), [Nette HTTP Component](https://github.com/nette/http), [Aura Web](https://github.com/auraphp/Aura.Web), [sabre/http](https://github.com/fruux/sabre-http)
+Bazı alternatifler: [Symfony HttpFoundation](https://github.com/symfony/HttpFoundation), [Nette HTTP Component](https://github.com/nette/http), [Aura Web](https://github.com/auraphp/Aura.Web), [sabre/http](https://github.com/fruux/sabre-http)
 
-In this tutorial I will use my own HTTP component, but of course you can use whichever package you like most. Just change the code accordingly.
+Bu derste ben kendi HTTP componentimi kullanacağım, ama elbette hangi paketi severseniz onu kullanabilirsiniz. Sadece kodu uygun şekilde değiştirmelisiniz.
 
-Again, edit the `composer.json` to add the new component and then run `composer update`:
+Tekrar, 'composer.json' dosyasını aşağıdaki şekilde düzenleyip 'composer update' kodumuzu çalıştırmalıyız:
 
 ```json
 "require": {
@@ -22,16 +22,16 @@ Again, edit the `composer.json` to add the new component and then run `composer 
 },
 ```
 
-Now you can add the following below your error handler code in your `Bootstrap.php` (and don't forget to remove the exception):
+Şimdi aşağıdaki kodları hata işleme kodlarımızın altına 'Bootstrap.php' dosyasına ekleyelim (ve exception'ı kaldırmayı unutmayın):
 
 ```php
 $request = new \Http\HttpRequest($_GET, $_POST, $_COOKIE, $_FILES, $_SERVER);
 $response = new \Http\HttpResponse;
 ```
 
-This sets up the `Request` and `Response` objects that you can use in your other classes to get request data and send a response back to the browser.
+Bu diğer sınıflarınızda request bilgilerini almak ve browser'a cevap göndermek için kullanabileceğiz 'Request' ve 'Response' objelerini oluşturur.
 
-To actually send something back, you will also need to add the following snippet at the end of your `Bootstrap.php` file:
+Gerçekten bir şey geri gönderebilmek için, ayrıca şu kodları 'Bootstrap.php' dosyasının en sonuna eklememiz gerekiyor:
 
 ```php
 foreach ($response->getHeaders() as $header) {
@@ -41,26 +41,26 @@ foreach ($response->getHeaders() as $header) {
 echo $response->getContent();
 ```
 
-This will send the response data to the browser. If you don't do this, nothing happens as the `Response` object only stores data. This is handled differently by most other HTTP components where the classes send data back to the browser as a side-effect, so keep that in mind if you use another component.
+Bu cevap bilgilerini tarayıcıya gönderir. Eğer bunu yapmazsanız, hiç birşey olmaz ve 'Response' objesi sadece bilgileri tutar. Bu işlemler farklı HTTP componentlerde farklı şekillerde halledilebilir, bazılarında sınıflar verileri tarayıcıya yan etki olarak gönderir, eğer farklı componentler kullanırsanız farkları göz önünde bulundurun.
 
-The second parameter of `header()` is false because otherwise existing headers will be overwritten.
+'header()' fonksiyonunun ikinci parametresini false olarak ayarladık aksi takdirde var olan headerların üzerine yazacaktır.
 
-Right now it is just sending an empty response back to the browser with the status code `200`; to change that, add the following code between the code snippets from above:
+Şu anda tarayıcıya '200' durum koduyla boş bir sayfayı geri gönderiyoruz; bunu değiştirmek için şu kodları yukarıdaki kodların arasına koymanız gerekiyor:
 
 ```php
 $content = '<h1>Hello World</h1>';
 $response->setContent($content);
 ```
 
-If you want to try a 404 error, use the following code:
+Eğer 404 hatasını denemek isterseniz, aşağıdaki kodları kullanabilirsiniz:
 
 ```php
 $response->setContent('404 - Page not found');
 $response->setStatusCode(404);
 ```
 
-Remember that the object is only storing data, so you if you set multiple status codes before you send the response, only the last one will be applied.
+Şunu unutmayın objeler sadece veriyi tutar, yani cevabı göndermeden önce eğer bir den fazla durum kodu kullanırsanız, sadece en son ayarlanan gönderilecektir.
 
-I will show you in later parts how to use the different features of the components. In the meantime, feel free to read the [documentation](https://github.com/PatrickLouys/http) or the source code if you want to find out how something works.
+Sonraki partlarda componentlerin farklı özelliklerini nasıl kullanacağınızı göstereceğim. Bu arada [dökümantasyonu](https://github.com/PatrickLouys/http) okuyabilir ya da kaynak kodlarının nasıl çalıştığını inceleyebilirsiniz.
 
-[<< previous](03-error-handler.md) | [next >>](05-router.md)
+[<< önceki](03-error-handler.md) | [sonraki >>](05-router.md)
