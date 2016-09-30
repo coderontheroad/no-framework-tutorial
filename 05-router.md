@@ -1,18 +1,18 @@
-[<< previous](04-http.md) | [next >>](06-dispatching-to-a-class.md)
+[<< önceki](04-http.md) | [sonraki >>](06-dispatching-to-a-class.md)
 
-### Router
+### Yönlendirme
 
-A router dispatches to different handlers depending on rules that you have set up.
+Yönlendirici belirlediğiniz kurallara göre farklı işlemleri çalıştırmanızı sağlar.
 
-With your current setup it does not matter what URL is used to access the application, it will always result in the same response. So let's fix that now.
+Şuanki yüklememiz için uygulamaya hangi URL'yi kullanarak erişirsek erişelim geri dönen cevap hep aynı şekilde olmaktadır. Hadi bunu düzeltelim.
 
-I will use [FastRoute](https://github.com/nikic/FastRoute) in this tutorial. But as always, you can pick your own favorite package.
+Ben bu ders için [FastRoute](https://github.com/nikic/FastRoute) kullanacağım. Ama her zamanki gibi, isteğiniz paketi seçmekte özgürsünüz.
 
-Alternative packages: [symfony/Routing](https://github.com/symfony/Routing), [Aura.Router](https://github.com/auraphp/Aura.Router), [fuelphp/routing](https://github.com/fuelphp/routing), [Klein](https://github.com/chriso/klein.php)
+Alternatif paketler: [symfony/Routing](https://github.com/symfony/Routing), [Aura.Router](https://github.com/auraphp/Aura.Router), [fuelphp/routing](https://github.com/fuelphp/routing), [Klein](https://github.com/chriso/klein.php)
 
-By now you know how to install Composer packages, so I will leave that to you.
+Şimdiye kadar Composer paketlerinin nasıl yüklendiğini öğrendiniz, yani bu kısmı size bırakıyorum.
 
-Now add this code block to your `Bootstrap.php` file where you added the 'hello world' message in the last part.
+Şimdi şu kodları 'Bootstrap.php' dosyamızda 'hello world' mesajını yazdığımız yere koyalım.
 
 ```php
 $dispatcher = \FastRoute\simpleDispatcher(function (\FastRoute\RouteCollector $r) {
@@ -42,11 +42,11 @@ switch ($routeInfo[0]) {
 }
 ```
 
-In the first part of the code, you are registering the available routes for you application. In the second part, the dispatcher gets called and the appropriate part of the switch statement will be executed. If a route was found, the handler callable will be executed.
+Kodun ilk bölümünde, uygulamamız için mümkün olan adresleri yönlendiriciye bildiriyoruz. İkinci bölümde dispatcher'ı çağırıyoruz ve uygun duruma ait bölüm çalıştırılıyor. Eğer uygun yönlendirici bulunursa çağırılabilir işlem çalıştırılır.
 
-This setup might work for really small applications, but once you start adding a few routes your bootstrap file will quickly get cluttered. So let's move them out into a separate file.
+Bu sistem küçük uygulamalar için çalışabilir, ama bir kaç adresle beraber bootstrap dosyanız büyümeye başladığında çok çabuk bir şekilde karmaşık hale gelebilir. Yani bunları ayrı bir dosyayı taşımalıyız.
 
-Create a `Routes.php` file in the `src/` folder. It should look like this:
+'src/' klasörünün içerisinde 'Routes.php' dosyası oluşturalım. Şu şekilde görünüyor olmalı:
 
 ```php
 <?php
@@ -61,7 +61,7 @@ return [
 ];
 ```
 
-Now let's rewrite the route collection part to use the `Routes.php` file.
+Şimdi route bölümünü 'Routes.php' dosyasıyla çalışması için yeniden yazalım.
 
 ```php
 $routeDefinitionCallback = function (\FastRoute\RouteCollector $r) {
@@ -74,6 +74,6 @@ $routeDefinitionCallback = function (\FastRoute\RouteCollector $r) {
 $dispatcher = \FastRoute\simpleDispatcher($routeDefinitionCallback);
 ```
 
-This is already an improvement, but now all the handler code is in the `Routes.php` file. This is not optimal, so let's fix that in the next part.
+Bu zaten bir gelişme, ama artık tüm yönlendirme işlemi kodlarımız 'Routes.php' dosyamızda. Bu en uygun çözüm değil, hadi bunu bir sonraki bölümde düzeltelim.
 
-[<< previous](04-http.md) | [next >>](06-dispatching-to-a-class.md)
+[<< önceki](04-http.md) | [sonraki >>](06-dispatching-to-a-class.md)
