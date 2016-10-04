@@ -1,14 +1,14 @@
-[<< previous](05-router.md) | [next >>](07-inversion-of-control.md)
+[<< önceki](05-router.md) | [sonraki >>](07-inversion-of-control.md)
 
-### Dispatching to a Class
+### Sınıflara Dağıtmak
 
-In this tutorial we won't implement [MVC (Model-View-Controller)](http://martinfowler.com/eaaCatalog/modelViewController.html). MVC can't be implemented properly in PHP anyway, at least not in the way it was originally conceived. If you want to learn more about this, read [A Beginner's Guide To MVC](http://blog.ircmaxell.com/2014/11/a-beginners-guide-to-mvc-for-web.html) and the followup posts.
+Bu derste [MVC (Model-View-Controller)](http://martinfowler.com/eaaCatalog/modelViewController.html) sistemini yapmaya çalışmayacağız. MVC PHP'de olması gerektiği gibi entegre edilemiyor, en azından orjinal tasarlanış şekliyle, her neyse. Eğer bunun hakkında daha fazlasını öğrenmek isterseniz [A Beginner's Guide To MVC](http://blog.ircmaxell.com/2014/11/a-beginners-guide-to-mvc-for-web.html) burayı okuyabilirsiniz.
 
-So forget about MVC and instead let's worry about [separation of concerns](http://en.wikipedia.org/wiki/Separation_of_concerns).
+MVC'yi unutalım ve [separation of concerns](http://en.wikipedia.org/wiki/Separation_of_concerns) üzerinde yoğunlaşalım.
 
-We will need a descriptive name for the classes that handle the requests. For this tutorial I will use `Controllers` because that will be familiar for the people coming from a framework background. You could also name them `Handlers`.
+İstekleri halleden sınıflar için açıklayıcı isimlere ihtiyacımız var. Bu ders için ben 'Controllers' olarak isimlendireceğim çünkü framework temelinden gelen insanlar için bu tanıdık gelecektir. Ayrıca bunları 'Handlers' olarak da isimlendirebilirsiniz.
 
-Create a new folder inside the `src/` folder with the name `Controllers`.In this folder we will place all our controller classes. In there, create a `Homepage.php` file.
+'src/' klasörümüzün içerisine 'Controllers' isimli yeni bir klasör oluşturalım. Bu klasörde tüm controller sınıflarımızı oluşturacağız. Burada, Homepage.php dosyasını oluşturalım.
 
 ```php
 <?php
@@ -24,9 +24,9 @@ class Homepage
 }
 ```
 
-The autoloader will only work if the namespace of a class matches the file path and the file name equals the class name. At the beginning I defined `Example` as the root namespace of the application so this is referring to the `src/` folder.
+Autoloader sadece namespace'i dosya yolu ile ve dosya ismiyle ortak olan sınıflar için çalışır. Uygulamam için başlangıçta 'Example' isimli src/ klasörünü niteleyen bir kök namespace tanımlamıştım.
 
-Now let's change the hello world route so that it calls your new class method instead of the closure. Change your `Routes.php` to this:
+Şimdi hello world adresini değiştirelim böylece yeni sınıfımızın metodlarıyla çalışabiliriz. Şimdi 'Routes.php' dosyasını şu şekilde değiştirelim:
 
 ```php
 return [
@@ -34,9 +34,9 @@ return [
 ];
 ```
 
-Instead of just a callable you are now passing an array. The first value is the fully namespaced classname, the second one the method name that you want to call.
+Sadece çağrılabilir yapmak yerine şimdi array gönderiyoruz. İlk değer namespace tabanlı sınıf ismimiz, ikinci değer ise bu sınıfın hangi methodunu çağırmak istediğimiz.
 
-To make this work, you will also have to do a small refactor to the routing part of the `Bootstrap.php`:
+Bunu çalışır yapmak için, 'Bootstrap.php' dosyamızın router bölümünde ufak refactor yapmamız gerekiyor:
 
 ```php
 case \FastRoute\Dispatcher::FOUND:
@@ -49,8 +49,8 @@ case \FastRoute\Dispatcher::FOUND:
     break;
 ```
 
-So instead of just calling a method you are now instantiating an object and then calling the method on it.
+Artık sadece method çağırmak yerine bir obje çalıştırıyoruz ve onun içindeki gerekli methodu çağırıyoruz.
 
-Now if you visit `http://localhost:8000/` everything should work. If not, go back and debug. And of course don't forget to commit your changes.
+Şimdi `http://localhost:8000/` adresine gittiğinizde herşey çalışıyor olmalı. Eğer çalışmıyorsa, geri dönün ve debug yapın. Ve değişikliklerinizi commit etmeyi unutmayın.
 
-[<< previous](05-router.md) | [next >>](07-inversion-of-control.md)
+[<< önceki](05-router.md) | [sonraki >>](07-inversion-of-control.md)
