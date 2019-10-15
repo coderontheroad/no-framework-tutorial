@@ -8,7 +8,7 @@ Framework kullanmıyor olmanız demek, her bir şey yapmak istediğinizde amerik
 
 Eğer Composer zaten yüklü değilse, websitesine giderek yükleyebilirsiniz. Projeniz için composer paketlerini [Packagist](https://packagist.org/) adresinde bulabilirsiniz.
 
-Projenizin kök dizininde 'composer.json' isimli bir dosya oluşturun. Bu projeniz ve projenizin bağımlılıkları için kullanılan, Composer için bir ayar dosyasıdır. Bu dosya doğru yazılmış bir JSON dosyası olmalıdır, yoksa Composer hata verir.
+Projenizin kök dizininde `composer.json` isimli bir dosya oluşturun. Bu projeniz ve projenizin bağımlılıkları için kullanılan, Composer için bir ayar dosyasıdır. Bu dosya doğru yazılmış bir JSON dosyası olmalıdır, yoksa Composer hata verir.
 
 Şu kodları dosyanın içerisine koyun:
 
@@ -26,7 +26,7 @@ Projenizin kök dizininde 'composer.json' isimli bir dosya oluşturun. Bu projen
         }
     ],
     "require": {
-        "php": ">=5.5.0"
+        "php": ">=7.0.0"
     },
     "autoload": {
         "psr-4": {
@@ -36,13 +36,19 @@ Projenizin kök dizininde 'composer.json' isimli bir dosya oluşturun. Bu projen
 }
 ```
 
-autoload yazan kısıma bakarsanız, 'Example' namespace'ini kullandığımı görebilirsiniz. Burada projeniz için ne uygunsa onu kullanabilirsiniz, ama şimdiden itibaren ben her zaman 'Example' namespace'ini kullanacağım. Bunu kendi projeniz için kodlarınızda istediğiniz gibi değiştirebileceğinizi unutmayın.
+autoload yazan kısıma bakarsanız, `Example` namespace'ini kullandığımı görebilirsiniz. Burada projeniz için ne uygunsa onu kullanabilirsiniz, ama şimdiden itibaren ben her zaman `Example` namespace'ini kullanacağım. Bunu kendi projeniz için kodlarınızda istediğiniz gibi değiştirebileceğinizi unutmayın.
 
-Yeni bir konsol penceresi açın ve projenizin kök dizinine gidin. Burada 'composer update' komutunu çalıştırın.
+Yeni bir konsol penceresi açın ve projenizin kök dizinine gidin. Burada `composer update` komutunu çalıştırın.
 
-Composer bağımlılıklarınızı ve vendor klasörünü kilitleyen 'composer.lock' dosyası oluşturacaktır.
+Composer bağımlılıklarınızı ve vendor klasörünü kilitleyen `composer.lock` dosyası oluşturacaktır.
 
-'composer.lock' dosyasını versiyon kontrolüne dahil etmek projeniz için iyi bir şeydir. Test araçlarının ([Travis CI](https://travis-ci.org/) gibi) projenizdeki kütüphanelerle aynı versiyonları kullanarak testleri çalıştırmasını sağlar. Aynı zamanda projede çalışan herkesin aynı kütüphane versiyonlarıyla çalışmasını sağlar, böylece 'benim bilgisayarımda çalışıyordu' problemleriyle karşılaşmazsınız.
+`composer.lock` dosyasını versiyon kontrolüne dahil etmek projeniz için iyi bir şeydir. Test araçlarının ([Travis CI](https://travis-ci.org/) gibi) projenizdeki kütüphanelerle aynı versiyonları kullanarak testleri çalıştırmasını sağlar. Aynı zamanda projede çalışan herkesin aynı kütüphane versiyonlarıyla çalışmasını sağlar, böylece 'benim bilgisayarımda çalışıyordu' problemleriyle karşılaşmazsınız.
+
+Bunun yanında [bağımlılıklarınızın kaynak kodlarını git reponuzun içerisine koymak istemezsiniz](https://getcomposer.org/doc/faqs/should-i-commit-the-dependencies-in-my-vendor-directory.md). Bu yüzden `.gitignore` dosyamıza şunu ekleyelim;
+
+```
+vendor/
+```
 
 Şimdi başarılı bir şekilde boş bir proje sistemi kurmuş oldunuz.
 
