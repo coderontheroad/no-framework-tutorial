@@ -1,17 +1,16 @@
-### To be continued...
+### Devam edecek...
 
-Congratulations. You made it this far.
+Tebrikler. Buraya kadar ilerlediniz.
 
-I hope you were following the tutorial step by step and not just skipping over the chapters :)
+Umarım bu dersi adım adım takip etmiş ve bölümleri sadece atlamamışsındır :)
 
-I have received good feedback so far so I decided to start writing a book. [Click here](http://artofphp.com/) to learn more about that.
+Şuana kadar iyi geri bildirimler aldım bu yüzden bir kitap yazmaya karar verdim. Daha fazlasını öğrenmek için [buraya tıklayın.](http://artofphp.com/)
 
-But don't worry, I will also keep working on this tutorial. I was a bit lazy over the summer but now that it getting colder again I will have much more time to spend on the tutorial.
+Ama endişelenmeyin, ayrıca bu ders üstünde çalışmaya devam edeceğim. Yaz boyunca biraz gevşek davrandım ama hava gittikçe soğuyor bu ders üstünde çalışmak için daha fazla vaktim olacak.
 
-If you got something out of the tutorial I would appreciate a star. It's the only way for me to see if people are actually reading this :)
+Eğer bu dersten birşeyler öğrendiyseniz yıldız vermenize minnettar olurum. İnsanların gerçekten bunu okuduğunu anlamam için tek yol bu :)
 
+Vaktiniz için teşekkürler,
 
-
-Thanks for your time,
-
-Patrick
+Yazan, Patrick
+Çevirmen, Oğuzhan
