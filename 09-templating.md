@@ -1,30 +1,30 @@
-[<< previous](08-dependency-injector.md) | [next >>](10-dynamic-pages.md)
+[<< önceki](08-dependency-injector.md) | [sonraki >>](10-dynamic-pages.md)
 
-### Templating
+### Şablonlar
 
-A template engine is not necessary with PHP because the language itself can take care of that. But it can make things like escaping values easier. They also make it easier to draw a clear line between your application logic and the template files which should only put your variables into the HTML code.
+Template engine PHP ile gerekli değildir çünkü dilin kendisi bunu halledebilir. Ama değerleri filtrelemenizi daha kolay yapmayı sağlayabilir. Ayrıca uygulamanızın mantığı ve değişkenleri HTML kodlarına koyduğunuz şablon dosyaları arasında açık bir çizgi oluşturmanızı kolaylaştırır.
 
-A good quick read on this is [ircmaxell on templating](http://blog.ircmaxell.com/2012/12/on-templating.html). Please also read [this](http://chadminick.com/articles/simple-php-template-engine.html) for a different opinion on the topic. Personally I don't have a strong opinion on the topic, so decide yourself which approach works better for you.
+Bunu okumak için bir kaynak [ircmaxell on templating](http://blog.ircmaxell.com/2012/12/on-templating.html). Lütfen konu ile ilgili farklı bir görüş için [bunuda](http://chadminick.com/articles/simple-php-template-engine.html) okuyun. Kişisel olarak konu üstünde güçlü bir görüşüm yok, yani hangi yaklaşımın sizin için daha iyi olduğuna kendiniz karar verin.
 
-For this tutorial we will use a PHP implementation of [Mustache](https://github.com/bobthecow/mustache.php). So install that package before you continue (`composer require mustache/mustache`).
+Bu ders için [Mustache](https://github.com/bobthecow/mustache.php)'in PHP portunu kullanacağız. Yani devam etmeden önce o paketi yükleyin (`composer require mustache/mustache`).
 
-Another well known alternative would be [Twig](http://twig.sensiolabs.org/).
+Bilinen diğer bir alternatif de [Twig](http://twig.sensiolabs.org/).
 
-Now please go and have a look at the source code of the [engine class](https://github.com/bobthecow/mustache.php/blob/master/src/Mustache/Engine.php). As you can see, the class does not implement an interface.
+Şimdi lütfen [engine sınıfının](https://github.com/bobthecow/mustache.php/blob/master/src/Mustache/Engine.php) kaynak kodlarına gidin ve inceleyin. Görebileceğiniz gibi, sınıf interface sağlamıyor.
 
-You could just type hint against the concrete class. But the problem with this approach is that you create tight coupling.
+Somut sınıfa karşı bir ipucu yazabilirsiniz. Ama bu yaklaşımın sorunu sıkı bir bağlantı oluşturursunuz.
 
-In other words, all your code that uses the engine will be coupled to this mustache package. If you want to change the implementation you have a problem. Maybe you want to switch to Twig, maybe you want to write your own class or you want to add functionality to the engine. You can't do that without going back and changing all your code that is tightly coupled.
+Diğer bir deyişle, motoru kullanan tüm kodlarınız bu mustache paketine bağlanacaktır. Eğer entegrasyonu değiştirmek isterseniz probleminiz olacak. Belki Twig'e geçmek isteyeceksiniz, belki kendi sınıfınızı yazmak isteyeceksiniz yada motora bir özellik eklemek isteyeceksiniz. Bunu tekrar geri dönüp sıkı bağlantı oluşturmuş tüm kodları değiştirmeden yapamayacaksınız.
 
-What we want is loose coupling. We will type hint against an interface and not a class/implementation. So if you need another implementation, you just implement that interface in your new class and inject the new class instead. 
+Yapmak istediğimiz zayıf bağlantı. Arayüze bir ipucu yazacağız ve sınıf/entegrasyona değil. Böylece farklı bir entegrasyona ihtiyacınız olursa, sadece o arayüzü yeni sınıfınızda entegre ederek ve yeni sınıfı inject ederek yapabilirsiniz.
 
-Instead of editing the code of the package we will use the [adapter pattern](http://en.wikipedia.org/wiki/Adapter_pattern). This sounds a lot more complicated than it is, so just follow along.
+Paketin kodlarını düzenlemek yerine [adapter pattern](http://en.wikipedia.org/wiki/Adapter_pattern) kullanacağız. Bu olduğundan daha karmaşık geliyor, sadece takip edin.
 
-First let's define the interface that we want. Remember the [interface segregation principle](http://en.wikipedia.org/wiki/Interface_segregation_principle). This means that instead of large interfaces with a lot of methods we want to make each interface as small as possible. A class can extend multiple interfaces if necessary.
+Önce istediğimiz interface'i tanımlayalım. [interface segregation principle](http://en.wikipedia.org/wiki/Interface_segregation_principle)'ı hatırlayın. Bu bir çok method ile beraber büyük interface yerine her interface'i olabildiğince küçük yapmaya çalışacağız anlamına geliyor. Eğer gerekirse bir sınıf birden fazla interface extend edebilir.
 
-So what does our template engine actually need to do? For now we really just need a simple `render` method. Create a new folder in your `src/` folder with the name `Template` where you can put all the template related things.
+Yani bizim şablon motorumuz aslında ne yapmalı? Şimdilik sadece basit bir `render` methoduna ihtiyacımız var. `src/` klasöründe tüm şablonla ilgili şeyleri koyabileceğiniz `Template` isimli yeni bir klasör oluşturun.
 
-In there create a new interface `Renderer.php` that looks like this:
+Bu klasörde `Renderer.php` isimli yeni bir interface oluşturun:
 
 ```php
 <?php declare(strict_types = 1);
@@ -37,7 +37,7 @@ interface Renderer
 }
 ```
 
-Now that this is sorted out, let's create the implementation for mustache. In the same folder, create the file `MustacheRenderer.php` with the following content:
+Şimdi bu çözüldü, hadi mustache için entegrasyonu oluşturalım. Aynı klasörde, şu içerikle beraber `MustacheRenderer.php` dosyası oluşturalım:
 
 ```php
 <?php declare(strict_types = 1);
@@ -62,13 +62,13 @@ class MustacheRenderer implements Renderer
 }
 ```
 
-As you can see the adapter is really simple. While the original class had a lot of methods, our adapter is really simple and only fulfills the interface.
+Görebileceğiniz gibi adaptör oldukça basit. Orjinal sınıf bir çok method içerirken, bizim adaptörümüz gerçekten basit ve sadece interface'i oluşturuyor.
 
-Of course we also have to add a definition in our `Dependencies.php` file because otherwise the injector won't know which implementation he has to inject when you hint for the interface. Add this line:
+Elbette `Dependencies.php` dosyamıza tanımlamayı eklememiz gerekiyor çünkü diğer türlü injector arayüz için ipucunda hangi entegrasyonu entegre etmesi gerektiğini bilemez. Şu satırı ekleyin:
 
 `$injector->alias('Example\Template\Renderer', 'Example\Template\MustacheRenderer');`
 
-Now in your `Homepage` controller, add the new dependency like this:
+Şimdi `Homepage` controllerda, şunun gibi yeni bir bağlılık ekleyin:
 
 ```php
 <?php declare(strict_types = 1);
@@ -98,7 +98,7 @@ class Homepage
 ...
 ```
 
-We also have to rewrite the `show` method. Please note that while we are just passing in a simple array, Mustache also gives you the option to pass in a view context object. We will go over this later, for now let's keep it as simple as possible.
+Ayrıca `show` methodunu yeniden yazmalıyız. Lütfen not edin basit bir dizi göndermemize rağmen, Mustache ayrıca view context objesi gönderme seçeneği veriyor. Bunun üstünden daha sonra geçeceğiz, şimdilik olabildiğince basit tutalım.
 
 ```php
     public function show()
@@ -111,9 +111,9 @@ We also have to rewrite the `show` method. Please note that while we are just pa
     }
 ```
 
-Now go check quickly in your browser if everything works. By default Mustache uses a simple string handler. But what we want is template files, so let's go back and change that.
+Şimdi herşeyin çalıştığını tarayıcınıza giderek kontrol edin. Varsayılan olarak Mustache basit string kullanır. Ama biz şablon dosyaları istiyoruz, bu yüzden geri dönelim ve değiştirelim.
 
-To make this change we need to pass an options array to the `Mustache_Engine` constructor. So let's go back to the `Dependencies.php` file and add the following code:
+Bu değişikliği yapmak için `Mustache_Engine` constructor'a seçenekler dizisi göndermeliyiz. Bu yüzden `Dependencies.php` dosyasına geri dönün ve şu kodları ekleyin:
 
 ```php
 $injector->define('Mustache_Engine', [
@@ -125,17 +125,17 @@ $injector->define('Mustache_Engine', [
 ]);
 ```
 
-We are passing an options array because we want to use the `.html` extension instead of the default `.mustache` extension. Why? Other template languages use a similar syntax and if we ever decide to change to something else then we won't have to rename all the template files.
+Seçenekler dizisi gönderiyoruz çünkü varsayılan `.mustache` uzantısı yerine `.html` uzantısını kullanmak istiyoruz. Neden? Diğer şablon dilleri benzer yazım şekli kullanır ve eğer başka bir şeye değiştirmek istersek tüm şablon dosyalarını yeniden isimlendirmek zorunda kalmayız.
 
-In your project root folder, create a `templates` folder. In there, create a file `Homepage.html`. The content of the file should look like this:
+Projenizin kök dizininde `templates` klasörü oluşturun. Orada, `Homepage.html` dosyası oluşturun. Dosyanın içeriği şöyle görünmeli:
 
 ```
 <h1>Hello World</h1>
 Hello {{ name }}
 ```
 
-Now you can go back to your `Homepage` controller and change the render line to `$html = $this->renderer->render('Homepage', $data);`
+Şimdi `Homepage` controller'a geri dönebilir ve render satırını `$html = $this->renderer->render('Homepage', $data);` a değiştirebilirsiniz.
 
-Navigate to the hello page in your browser to make sure everything works. And as always, don't forget to commit your changes.
+Tarayıcınızdan hello sayfasına gidin ve herşeyin çalıştığından emin olun. Her zamanki gibi değişikliklerinizi commit etmeyi unutmayın.
 
-[<< previous](08-dependency-injector.md) | [next >>](10-dynamic-pages.md)
+[<< önceki](08-dependency-injector.md) | [sonraki >>](10-dynamic-pages.md)
