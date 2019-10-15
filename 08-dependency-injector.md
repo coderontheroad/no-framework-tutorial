@@ -1,12 +1,12 @@
 [<< previous](07-inversion-of-control.md) | [next >>](09-templating.md)
 
-### Dependency Injector
+### Bağımlılıklar
 
-A dependency injector resolves the dependencies of your class and makes sure that the correct objects are injected when the class is instantiated.
+Dependency injector sınıfınızın bağımlılıklarını çözer ve sınıf başlatıldığında doğru objelerin oluşturulduğundan emin olur.
 
-There is only one injector that I can recommend: [Auryn](https://github.com/rdlowrey/Auryn). Sadly all the alternatives that I am aware of are using the [service locator antipattern](http://blog.ploeh.dk/2010/02/03/ServiceLocatorisanAnti-Pattern/) in their documentation and examples.
+Burada önerebileceğim sadece bir tane injector var: [Auryn](https://github.com/rdlowrey/Auryn). Ne yazıkki baktığım tüm alternatifler dökümantasyonlarında ve örneklerinde [service locator antipattern](http://blog.ploeh.dk/2010/02/03/ServiceLocatorisanAnti-Pattern/) kullanıyorlar.
 
-Install the Auryn package and then create a new file called `Dependencies.php` in your `src/` folder. In there add the following content:
+Auryn paketini yükleyin ve `src/` klasöründe `Dependencies.php` diye bir dosya oluşturun. Orada şu içeriği ekleyebilirsiniz:
 
 ```php
 <?php declare(strict_types = 1);
@@ -29,13 +29,13 @@ $injector->share('Http\HttpResponse');
 return $injector;
 ```
 
-Make sure you understand what `alias`, `share` and `define` are doing before you continue. You can read about them in the [Auryn documentation](https://github.com/rdlowrey/Auryn).
+Devam etmeden önce `alias`, `share` ve `define` ın ne yaptığını anladığınızdan emin olun. Hakkında daha fazlasını [Auryn dökümantasyonlarından](https://github.com/rdlowrey/Auryn) okuyabilirsiniz.
 
-You are sharing the HTTP objects because there would not be much point in adding content to one object and then returning another one. So by sharing it you always get the same instance.
+HTTP objelerini paylaşıyorsunuz çünkü bir objeye içeriği eklerken başka bir objeyi geri döndürmek anlamsız olur. Bu yüzden paylaşarak her zaman aynı objeyi alırsınız.
 
-The alias allows you to type hint the interface instead of the class name. This makes it easy to switch the implementation without having to go back and edit all your classes that use the old implementation.
+Alias arayüze sınıf ismi yerine ipucu yazmanıza izin verir. Bu eski uygulama yöntemini kullanan sınıflara geri dönüp tek tek düzenlemeden yeni uygulama yöntemine geçirmenize yardımcı olur.
 
-Of course your `Bootstrap.php` will also need to be changed. Before you were setting up `$request` and `$response` with `new` calls. Switch that to the injector now so that we are using the same instance of those objects everywhere.
+Elbette `Bootstrap.php` dosyanızında değişmesi gerekiyor. `new` fonksiyon ile birlikte `$request` ve `$response` ayarlıyordunuz. Şimdi onu injector'a değiştirin böylece o objeleri her yerde aynı örnekten kullanabiliriz.
 
 ```php
 $injector = include('Dependencies.php');
@@ -44,23 +44,23 @@ $request = $injector->make('Http\HttpRequest');
 $response = $injector->make('Http\HttpResponse');
 ```
 
-The other part that has to be changed is the dispatching of the route. Before you had the following code:
+Değişmesi gereken bir diğer bölümde route'ın yönlendirilmesi. Önceden olan şu kodunuzu:
 
 ```php
 $class = new $className($response);
 $class->$method($vars);
 ```
 
-Change that to the following:
+Şu koda çevirin:
 
 ```php
 $class = $injector->make($className);
 $class->$method($vars);
 ```
 
-Now all your controller constructor dependencies will be automatically resolved with Auryn.
+Şimdi tüm controller constructor bağımlılıkları Auryn ile otomatik olarak çözülecek.
 
-Go back to your `Homepage` controller and change it to the following:
+`Homepage` controller'a geri dönün ve şu şekilde değiştirin:
 
 ```php
 <?php declare(strict_types = 1);
@@ -90,8 +90,8 @@ class Homepage
 }
 ```
 
-As you can see now the class has two dependencies. Try to access the page with a GET parameter like this `http://localhost:8000/?name=Arthur%20Dent`.
+Şimdi görebildiğiniz gibi sınıfın iki bağımlılığı var. `http://localhost:8000/?name=Arthur%20Dent` bunun gibi sayfaya GET parametresi ile erişmeye çalışın.
 
-Congratulations, you have now successfully laid the groundwork for your application. 
+Tebrikler, şimdi başarıyla uygulamanız için temeli oluşturdunuz.
 
 [<< previous](07-inversion-of-control.md) | [next >>](09-templating.md)
