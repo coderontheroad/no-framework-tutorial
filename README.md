@@ -1,7 +1,7 @@
 ## Framework kullanmadan PHP uygulama yapmak
 
 ### Çevirmenin Notu
-Bu belgeyi olduğu gibi çevirmek yerine daha doğal olması ve daha anlaşılır olması için bazı cümleleri yapısal olarak değiştirerek çeviriyorum. Ama merak etmeyin orjinal yazıda verilen tüm bilgilerin eksiksiz verilmesi temel amacım. Umarım tüm PHP severlere yararlı olur.
+Bu belge olduğu gibi çevirilmek yerine daha doğal ve daha anlaşılır olması için bazı cümleleri yapısal olarak değiştirerek çevirilmiştir.
 
 ### Giriş
 
@@ -11,9 +11,9 @@ En azından [SOLID](http://en.wikipedia.org/wiki/SOLID_%28object-oriented_design
 
 Stack Overflow'un PHP sayfalarında bir çok insanın gelip 'şu framework iyi mi?' şeklinde soru sorduğunu gördüm. Çoğu zaman cevap; uygulamaları için framework yerine sadece PHP kullanmaları şeklinde oluyor. Ama çoğu insan bunun için nereden başlaması gerektiğini bilmiyor.
 
-Buradaki amacım insanlara başlayabileceği kolay bir kaynak sağlamak. Bir çok durumda frameworkler anlamsız, bunun yerine üçüncü parti paketler kullanarak sıfırdan uygulama geliştirmek çoğu insanın düşündüğünden çok çok daha kolay.
+Buradaki amacım insanlara başlayabileceği kolay bir kaynak sağlamak. Bir çok durumda frameworkler gereksiz, bunun yerine üçüncü parti paketler kullanarak sıfırdan uygulama geliştirmek çoğu insanın düşündüğünden çok çok daha kolay.
 
-**Bu ders PHP 5.5 ya da daha yeni versiyonlar için yazıldı.** Eğer daha eski bir versiyon kullanıyorsanız, lütfen başlamadan önce yükseltin. [Şu anki kararlı sürümü](http://php.net/downloads.php) kullanmanızı öneriyorum.
+**Bu ders PHP 7.0 ya da daha yeni versiyonlar için yazıldı.** Eğer daha eski bir versiyon kullanıyorsanız, lütfen başlamadan önce yükseltin. [Şu anki kararlı sürümü](http://php.net/downloads.php) kullanmanızı öneriyorum.
 
 Hadi [ilk bölüm](01-front-controller.md) ile hemen başlayalım.
 
