@@ -12,24 +12,24 @@ Bazı alternatifler: [Symfony HttpFoundation](https://github.com/symfony/HttpFou
 
 Bu derste ben kendi HTTP componentimi kullanacağım, ama elbette hangi paketi severseniz onu kullanabilirsiniz. Sadece kodu uygun şekilde değiştirmelisiniz.
 
-Tekrar, 'composer.json' dosyasını aşağıdaki şekilde düzenleyip 'composer update' kodumuzu çalıştırmalıyız:
+Tekrar, `composer.json` dosyasını aşağıdaki şekilde düzenleyip `composer update` kodumuzu çalıştırmalıyız:
 
 ```json
 "require": {
-    "php": ">=5.5.0",
-    "filp/whoops": ">=1.1.2",
-    "patricklouys/http": ">=1.1.0"
+    "php": ">=7.0.0",
+    "filp/whoops": "~2.1",
+    "patricklouys/http": "~1.4"
 },
 ```
 
-Şimdi aşağıdaki kodları hata işleme kodlarımızın altına 'Bootstrap.php' dosyasına ekleyelim (ve exception'ı kaldırmayı unutmayın):
+Şimdi aşağıdaki kodları hata işleme kodlarımızın altına `Bootstrap.php` dosyasına ekleyelim (ve exception'ı kaldırmayı unutmayın):
 
 ```php
 $request = new \Http\HttpRequest($_GET, $_POST, $_COOKIE, $_FILES, $_SERVER);
 $response = new \Http\HttpResponse;
 ```
 
-Bu diğer sınıflarınızda request bilgilerini almak ve browser'a cevap göndermek için kullanabileceğiz 'Request' ve 'Response' objelerini oluşturur.
+Bu diğer sınıflarınızda request bilgilerini almak ve browser'a cevap göndermek için kullanabileceğiz `Request` ve `Response` objelerini oluşturur.
 
 Gerçekten bir şey geri gönderebilmek için, ayrıca şu kodları 'Bootstrap.php' dosyasının en sonuna eklememiz gerekiyor:
 
@@ -41,9 +41,9 @@ foreach ($response->getHeaders() as $header) {
 echo $response->getContent();
 ```
 
-Bu cevap bilgilerini tarayıcıya gönderir. Eğer bunu yapmazsanız, hiç birşey olmaz ve 'Response' objesi sadece bilgileri tutar. Bu işlemler farklı HTTP componentlerde farklı şekillerde halledilebilir, bazılarında sınıflar verileri tarayıcıya yan etki olarak gönderir, eğer farklı componentler kullanırsanız farkları göz önünde bulundurun.
+Bu cevap bilgilerini tarayıcıya gönderir. Eğer bunu yapmazsanız, hiç birşey olmaz ve `Response` objesi sadece bilgileri tutar. Bu işlemler farklı HTTP componentlerde farklı şekillerde halledilebilir, bazılarında sınıflar verileri tarayıcıya yan etki olarak gönderir, eğer farklı componentler kullanırsanız farkları göz önünde bulundurun.
 
-'header()' fonksiyonunun ikinci parametresini false olarak ayarladık aksi takdirde var olan headerların üzerine yazacaktır.
+`header()` fonksiyonunun ikinci parametresini false olarak ayarladık aksi takdirde var olan headerların üzerine yazacaktır.
 
 Şu anda tarayıcıya '200' durum koduyla boş bir sayfayı geri gönderiyoruz; bunu değiştirmek için şu kodları yukarıdaki kodların arasına koymanız gerekiyor:
 
