@@ -1,4 +1,4 @@
-[<< previous](07-inversion-of-control.md) | [next >>](09-templating.md)
+[<< önceki](07-inversion-of-control.md) | [sonraki >>](09-templating.md)
 
 ### Bağımlılıklar
 
@@ -94,4 +94,4 @@ class Homepage
 
 Tebrikler, şimdi başarıyla uygulamanız için temeli oluşturdunuz.
 
-[<< previous](07-inversion-of-control.md) | [next >>](09-templating.md)
+[<< önceki](07-inversion-of-control.md) | [sonraki >>](09-templating.md)
