@@ -2,16 +2,16 @@
 
 ### Inversion of Control
 
-Son bölümde bir controller sınıfı oluşturduk ve 'echo' ile bir çıktı verdik. Ama şunu unutmayalım object oriented güzel bir HTTP soyutlama biçimimiz var. Ama şuan sınıfımız içerisinden kullanılabilir değil.
+Son bölümde bir controller sınıfı oluşturduk ve `echo` ile bir çıktı verdik. Ama şunu unutmayalım object oriented güzel bir HTTP soyutlama biçimimiz var. Ama şuan sınıfımız içerisinden kullanılabilir değil.
 
-En makul kullanım inversion of control [inversion of control](http://en.wikipedia.org/wiki/Inversion_of_control) kullanmak. Bu, sınıfa, ihtiyacı olan objeyi oluşturma sorumluluğu vermek yerine, sadece objeyi sormak demek. Bunu da [dependency injection](http://en.wikipedia.org/wiki/Dependency_injection) ile yapabiliriz.
+En makul kullanım [inversion of control](http://en.wikipedia.org/wiki/Inversion_of_control) kullanmak. Bu, sınıfa ihtiyacı olan objeyi oluşturma sorumluluğu vermek yerine, sadece objeyi sormak demek. Bunu da [dependency injection](http://en.wikipedia.org/wiki/Dependency_injection) ile yapabiliriz.
 
-Eğer bu söylediklerim size şuan size biraz karışık geliyorsa endişelenmenize gerek yok. Sadece dersi takip edin ve işlemleri yaptıkça bu şeyler size çok daha mantıklı gelmeye başlayacak.
+Eğer bu söylediklerim size şuan biraz karmaşık geliyorsa endişelenmenize gerek yok. Sadece dersi takip edin ve işlemleri yaptıkça bu şeyler size çok daha mantıklı gelmeye başlayacak.
 
 `Homepage` controller dosyanızı bu şekilde değiştirin:
 
 ```php
-<?php
+<?php declare(strict_types = 1);
 
 namespace Example\Controllers;
 
