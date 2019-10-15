@@ -46,10 +46,10 @@ Kodun ilk bölümünde, uygulamamız için mümkün olan adresleri yönlendirici
 
 Bu sistem küçük uygulamalar için çalışabilir, ama bir kaç adresle beraber bootstrap dosyanız büyümeye başladığında çok çabuk bir şekilde karmaşık hale gelebilir. Yani bunları ayrı bir dosyayı taşımalıyız.
 
-'src/' klasörünün içerisinde 'Routes.php' dosyası oluşturalım. Şu şekilde görünüyor olmalı:
+`src/` klasörünün içerisinde `Routes.php` dosyası oluşturalım. Şu şekilde görünüyor olmalı:
 
 ```php
-<?php
+<?php declare(strict_types = 1);
 
 return [
     ['GET', '/hello-world', function () {
@@ -61,7 +61,7 @@ return [
 ];
 ```
 
-Şimdi route bölümünü 'Routes.php' dosyasıyla çalışması için yeniden yazalım.
+Şimdi route bölümünü `Routes.php` dosyasıyla çalışması için yeniden yazalım.
 
 ```php
 $routeDefinitionCallback = function (\FastRoute\RouteCollector $r) {
@@ -74,6 +74,6 @@ $routeDefinitionCallback = function (\FastRoute\RouteCollector $r) {
 $dispatcher = \FastRoute\simpleDispatcher($routeDefinitionCallback);
 ```
 
-Bu zaten bir gelişme, ama artık tüm yönlendirme işlemi kodlarımız 'Routes.php' dosyamızda. Bu en uygun çözüm değil, hadi bunu bir sonraki bölümde düzeltelim.
+Bu zaten bir gelişme, ama artık tüm yönlendirme işlemi kodlarımız `Routes.php` dosyamızda. Bu en uygun çözüm değil, hadi bunu bir sonraki bölümde düzeltelim.
 
 [<< önceki](04-http.md) | [sonraki >>](06-dispatching-to-a-class.md)
