@@ -13,4 +13,5 @@ Eğer bu dersten birşeyler öğrendiyseniz yıldız vermenize minnettar olurum.
 Vaktiniz için teşekkürler,
 
 Yazan, Patrick
+
 Çevirmen, Oğuzhan
