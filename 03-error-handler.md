@@ -14,23 +14,23 @@ Yeni bir paket yüklemek için, 'composer.json' dosyanızı açın ve require b�
 
 ```php
 "require": {
-    "php": ">=5.5.0",
-    "filp/whoops": ">=1.1.2"
+    "php": ">=7.0.0",
+    "filp/whoops": "~2.1"
 },
 ```
 
-Şimdi 'composer update' kodunu konsolunuzda çalıştırın ve herşey yüklenmiş olacaktır.
+Şimdi `composer update` kodunu konsolunuzda çalıştırın ve herşey yüklenmiş olacaktır.
 
-Ama henüz kullanamazsınız. PHP dosyaları nerede bulabileceğini bilmeyecektir. Bunun için autoloader'a ihtiyacınız var, en mantıklı olanı [PSR-4](http://www.php-fig.org/psr/psr-4/) autoloader. Ama Composer zaten bizim yerimize bunu hallediyor, ve yek yapmamız gereken 'Bootstrap.php' dosyasına `require __DIR__ . '/../vendor/autoload.php';` kodunu eklemek.
+Ama henüz kullanamazsınız. PHP dosyaları nerede bulabileceğini bilmeyecektir. Bunun için autoloader'a ihtiyacınız var, en mantıklı olanı [PSR-4](http://www.php-fig.org/psr/psr-4/) autoloader. Ama Composer zaten bizim yerimize bunu hallediyor, ve yek yapmamız gereken `Bootstrap.php` dosyasına `require __DIR__ . '/../vendor/autoload.php';` kodunu eklemek.
 
 **Önemli:** production bölümünde herhangi bir hata göstermemelisiniz. Ayrıntılı hatalar ya da sadece basit hata mesajları bile birinin sisteminize sızmasına yardımcı olabilir. Her zaman kullanıcı odaklı hata sayfaları gösterin ve kendinize mail atmak, log tutmak veya benzeri seçenekleri kullanın. Yani production da hataları yalnızca siz görmelisiniz.
 
-Development için bilgilendirici ve güzel bir hata sayfası istiyoruz. Çözüm, nerede olduğumuza göre kodlar arasında geçiş yapmak. Şimdilik sadece 'development' olarak ayarlayabilirsiniz.
+Development için bilgilendirici ve güzel bir hata sayfası istiyoruz. Çözüm, nerede olduğumuza göre kodlar arasında geçiş yapmak. Şimdilik sadece `development` olarak ayarlayabilirsiniz.
 
-Hata işlemeyi hallettikten sonra, bir 'Exception' oluşturup herşeyin düzgün çalışıp çalışmadığına bakmalıyız. 'Bootstrap.php' dosyanız şuna benzer bir şekilde gözükmeli:
+Hata işlemeyi hallettikten sonra, bir `Exception` oluşturup herşeyin düzgün çalışıp çalışmadığına bakmalıyız. `Bootstrap.php` dosyanız şuna benzer bir şekilde gözükmeli:
 
 ```php
-<?php
+<?php declare(strict_types = 1);
 
 namespace Example;
 
@@ -48,7 +48,7 @@ if ($environment !== 'production') {
     $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
 } else {
     $whoops->pushHandler(function($e){
-        echo 'Friendly error page and send an email to the developer';
+        echo 'Todo: Friendly error page and send an email to the developer';
     });
 }
 $whoops->register();
