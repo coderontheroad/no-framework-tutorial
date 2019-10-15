@@ -6,7 +6,7 @@ A template engine is not necessary with PHP because the language itself can take
 
 A good quick read on this is [ircmaxell on templating](http://blog.ircmaxell.com/2012/12/on-templating.html). Please also read [this](http://chadminick.com/articles/simple-php-template-engine.html) for a different opinion on the topic. Personally I don't have a strong opinion on the topic, so decide yourself which approach works better for you.
 
-For this tutorial we will use a PHP implementation of [Mustache](https://github.com/bobthecow/mustache.php). So install that package before you continue.
+For this tutorial we will use a PHP implementation of [Mustache](https://github.com/bobthecow/mustache.php). So install that package before you continue (`composer require mustache/mustache`).
 
 Another well known alternative would be [Twig](http://twig.sensiolabs.org/).
 
@@ -27,20 +27,20 @@ So what does our template engine actually need to do? For now we really just nee
 In there create a new interface `Renderer.php` that looks like this:
 
 ```php
-<?php
+<?php declare(strict_types = 1);
 
 namespace Example\Template;
 
 interface Renderer
 {
-    public function render($template, $data = []);
+    public function render($template, $data = []) : string;
 }
 ```
 
 Now that this is sorted out, let's create the implementation for mustache. In the same folder, create the file `MustacheRenderer.php` with the following content:
 
 ```php
-<?php
+<?php declare(strict_types = 1);
 
 namespace Example\Template;
 
@@ -55,7 +55,7 @@ class MustacheRenderer implements Renderer
         $this->engine = $engine;
     }
 
-    public function render($template, $data = [])
+    public function render($template, $data = []) : string
     {
         return $this->engine->render($template, $data);
     }
@@ -71,7 +71,7 @@ Of course we also have to add a definition in our `Dependencies.php` file becaus
 Now in your `Homepage` controller, add the new dependency like this:
 
 ```php
-<?php
+<?php declare(strict_types = 1);
 
 namespace Example\Controllers;
 
