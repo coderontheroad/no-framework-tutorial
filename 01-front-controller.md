@@ -2,7 +2,7 @@
 
 ### Ön Controller
 
-[Ön controller](http://en.wikipedia.org/wiki/Front_Controller_pattern) uygulamanıza giriş için bir tek nokta oluşturmakdır.
+[Ön controller](http://en.wikipedia.org/wiki/Front_Controller_pattern) uygulamanız için bir giriş noktası oluşturmakdır.
 
 Başlarken, projeniz için boş bir klasör oluşturun. Aynı zamanda tüm istekleri karşılayacak bir giriş noktasına ihtiyacınız var. Bu da demek oluyor ki 'index.php' dosyasını oluşturmak zorundayız.
 
@@ -17,12 +17,14 @@ Sonuç olarak bunu yapmak yerine proje klasöründe 'public' isimli bir klasör 
 'public' klasörünüzün içerisinde şimdi 'index.php' dosyasını oluşturabiliriz. Şunu aklınızdan çıkarmayın; burada hiç bir açık vermek istemezsiniz, yani sadece şu kodu koymamız yeterlidir:
 
 ```php
-<?php 
+<?php declare(strict_types = 1); 
 
 require __DIR__ . '/../src/Bootstrap.php';
 ```
 
 `__DIR__` klasörün yolunu tutan bir [sihirli sabittir](http://php.net/manual/tr/language.constants.predefined.php). Bunu kullanarak, 'require' fonksiyonunun her zaman aynı yolu kullanarak çalışmasını sağlayabilirsiniz. Aksi takdirde 'index.php' dosyasını başka bir klasörden çalıştırırsanız dosyayı bulamayacaktır.
+
+`declare(strict_types = 1);` şuanki dosyayı kısıtlanmış yazmaya ayarlar. Bu derste biz tüm PHP dosyalarımız için bunu kullanacağız. Bu yazı isteyen bir methoda parametre olarak sadece sayı göndermenize izin vermemek anlamına gelir. Eğer strict modu kullanmazsanız, otomatik olarak gerekli türe çevirilir. Strict mode ile eğer yanlış tür gelirse bir exception fırlatılacaktır.
 
 'Bootstrap.php' dosyası uygulamayı bir araya getiren dosyamız olacak. Az sonra buna geleceğiz.
 
@@ -31,7 +33,7 @@ Public klasörünün geri kalanında diğer statik dosyalarımız (JavaScript ve
 Şimdi 'src' klasörünün içerisine girin ve içerisine şu kodları yazarak 'Bootstrap.php' dosyasını oluşturun:
 
 ```php
-<?php 
+<?php declare(strict_types = 1);
 
 echo 'Hello World!';
 ```
@@ -41,5 +43,11 @@ echo 'Hello World!';
 Eğer bir hata varsa, geriye gidin ve düzeltmeye çalışın. Eğer sadece boş sayfa görüyorsanız, console penceresini sunucu hatası varmı diye kontrol edebilirsiniz.
 
 Şimdi ilerlemeyi kayıt altına almanın tam zamanı. Eğer zaten Git kullanmıyorsanız, yeni bir repo oluşturun. Bu bir Git dersi olmadığı için detaylara girmeyeceğim. Ama versiyon kontrol sistemi kullanmak sadece öğrenmek için proje yapıyorsanız bile bir alışkanlık olmalı.
+
+Bazı editörler ve IDEler proje klasörünüze kendi dosyalarını koyarlar. Eğer böyle bir durum varsa .gitignore dosyası oluşturun ve dosyaları/klasörleri hariç tutun. Aşağıdaki PHPStorm için bir örnektir;
+
+```
+.idea/
+```
 
 [sonraki >>](02-composer.md)
