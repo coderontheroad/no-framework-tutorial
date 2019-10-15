@@ -6,12 +6,12 @@ Bu derste [MVC (Model-View-Controller)](http://martinfowler.com/eaaCatalog/model
 
 MVC'yi unutalım ve [separation of concerns](http://en.wikipedia.org/wiki/Separation_of_concerns) üzerinde yoğunlaşalım.
 
-İstekleri halleden sınıflar için açıklayıcı isimlere ihtiyacımız var. Bu ders için ben 'Controllers' olarak isimlendireceğim çünkü framework temelinden gelen insanlar için bu tanıdık gelecektir. Ayrıca bunları 'Handlers' olarak da isimlendirebilirsiniz.
+İstekleri halleden sınıflar için açıklayıcı isimlere ihtiyacımız var. Bu ders için ben `Controllers` olarak isimlendireceğim çünkü framework temelinden gelen insanlar için bu tanıdık gelecektir. Ayrıca bunları `Handlers` olarak da isimlendirebilirsiniz.
 
-'src/' klasörümüzün içerisine 'Controllers' isimli yeni bir klasör oluşturalım. Bu klasörde tüm controller sınıflarımızı oluşturacağız. Burada, Homepage.php dosyasını oluşturalım.
+`src/` klasörümüzün içerisine `Controllers` isimli yeni bir klasör oluşturalım. Bu klasörde tüm controller sınıflarımızı oluşturacağız. Burada, Homepage.php dosyasını oluşturalım.
 
 ```php
-<?php
+<?php declare(strict_types = 1);
 
 namespace Example\Controllers;
 
@@ -24,9 +24,9 @@ class Homepage
 }
 ```
 
-Autoloader sadece namespace'i dosya yolu ile ve dosya ismiyle ortak olan sınıflar için çalışır. Uygulamam için başlangıçta 'Example' isimli src/ klasörünü niteleyen bir kök namespace tanımlamıştım.
+Autoloader sadece namespace'i dosya yolu ile ve dosya ismiyle ortak olan sınıflar için çalışır. Uygulamam için başlangıçta `Example` isimli `src/` klasörünü niteleyen bir kök namespace tanımlamıştım.
 
-Şimdi hello world adresini değiştirelim böylece yeni sınıfımızın metodlarıyla çalışabiliriz. Şimdi 'Routes.php' dosyasını şu şekilde değiştirelim:
+Şimdi hello world adresini değiştirelim böylece yeni sınıfımızın metodlarıyla çalışabiliriz. Şimdi `Routes.php` dosyasını şu şekilde değiştirelim:
 
 ```php
 return [
