@@ -1,4 +1,4 @@
-[<< previous](06-dispatching-to-a-class.md) | [next >>](08-dependency-injector.md)
+[<< önceki](06-dispatching-to-a-class.md) | [sonraki >>](08-dependency-injector.md)
 
 ### Inversion of Control
 
@@ -48,4 +48,4 @@ $class->$method($vars);
 
 Şimdi herşey yine çalışmaya başladı. Ama bu örneği takip ederseniz, bu yolla oluşturulan tüm objeleriniz aynı objeleri inject edecektir. Bu tabiki iyi bir şey değil, sonraki bölümde bunu düzeltelim.
 
-[<< previous](06-dispatching-to-a-class.md) | [next >>](08-dependency-injector.md)
+[<< önceki](06-dispatching-to-a-class.md) | [sonraki >>](08-dependency-injector.md)
