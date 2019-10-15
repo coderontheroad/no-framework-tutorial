@@ -9,7 +9,7 @@ Our first feature will be dynamic pages generated from [markdown](http://en.wiki
 Create a `Page` controller with the following content:
 
 ```php
-<?php
+<?php declare(strict_types = 1);
 
 namespace Example\Controllers;
 
@@ -42,20 +42,20 @@ So let's put that functionality into a separate class. There is a good chance th
 In your 'src' folder, create a new folder `Page`. In there we will put all the page related classes. Add a new file in there called `PageReader.php` with this content:
 
 ```php
-<?php
+<?php declare(strict_types = 1);
 
 namespace Example\Page;
 
 interface PageReader
 {
-    public function readBySlug($slug);
+    public function readBySlug(string $slug) : string;
 }
 ```
 
 For the implementation, create a `FilePageReader.php` file. The file will looks like this:
 
 ```php
-<?php
+<?php declare(strict_types = 1);
 
 namespace Example\Page;
 
@@ -65,15 +65,12 @@ class FilePageReader implements PageReader
 {
     private $pageFolder;
 
-    public function __construct($pageFolder)
+    public function __construct(string $pageFolder)
     {
-        if (!is_string($pageFolder)) {
-            throw new InvalidArgumentException('pageFolder must be a string');
-        }
         $this->pageFolder = $pageFolder;
     }
 
-    public function readBySlug($slug)
+    public function readBySlug(string $slug) : string
     {
         return 'I am a placeholder';
     }
@@ -83,8 +80,6 @@ class FilePageReader implements PageReader
 As you can see we are requiring the page folder path as a constructor argument. This makes the class flexible and if we decide to move files or write unit tests for the class, we can easily change the location with the constructor argument.
 
 You could also put the page related things into it's own package and reuse it in different applications. Because we are not tightly coupling things, things are very flexible.
-
-Because PHP does not have the ability to type hint for scalar values (things like strings and integers), we have to manually check that `$pageFolder` is a string. If we don't do that, there might be a bug in the future that is hard to find if a wrong type is injected. By throwing an exception, this can be caught and debugged immediately.
 
 This will do for now. Let's create a template file for our pages with the name `Page.html` in the `templates` folder. For now just add `{{ content }}` in there.
 
@@ -119,7 +114,7 @@ Did you get everything to work?
 If not, this is how the beginning of your controller should look now:
 
 ```php
-<?php
+<?php declare(strict_types = 1);
 
 namespace Example\Controllers;
 
@@ -147,21 +142,10 @@ class Page
 
 So far so good, now let's make our `FilePageReader` actually do some work.
 
-Again, let's check first that the proper type was passed into the method:
+We need to be able to communicate that a page was not found. For this we can create a custom exception that we can catch later. In your `src/Page` folder, create a `InvalidPageException.php` file with this content:
 
 ```php
-public function readBySlug($slug)
-{
-    if (!is_string($slug)) {
-        throw new InvalidArgumentException('slug must be a string');
-    }
-}
-```
-
-We also need to be able to communicate that a page was not found. For this we can create a custom exception that we can catch later. In your `src/Page` folder, create a `InvalidPageException.php` file with this content:
-
-```php
-<?php
+<?php declare(strict_types = 1);
 
 namespace Example\Page;
 
@@ -182,7 +166,7 @@ Then in the `FilePageReader` file add this code at the end of your `readBySlug` 
 ```php
 $path = "$this->pageFolder/$slug.md";
 
-if(!file_exists($path)) {
+if (!file_exists($path)) {
     throw new InvalidPageException($slug);
 }
 
@@ -212,12 +196,7 @@ public function show($params)
 }
 ```
 
-Add this at the top of your file:
-```php
-use Example\Page\InvalidPageException;
-```
-
-It is important that you don't forget this step, otherwise it will try to catch the wrong exception (it's looking in the wrong namespace) and thus will never catch it. 
+Make sure that you use an `use` statement for the `InvalidPageException` at the top of the file.
 
 Try a few different URLs to check that everything is working as it should. If something is wrong, go back and debug it until it works.
 
