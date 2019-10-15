@@ -2,26 +2,26 @@
 
 ### Page Menu
 
-Now we have some sweet dynamic pages. But nobody can find them.
+Now we have made a few nice dynamic pages. But nobody can find them.
 
-Let's fix that now. In this chapter we will create a menu with links to all our pages.
+Let's fix that now. In this chapter we will create a menu with links to all of our pages.
 
-When we have a menu, we will want to be able to reuse the same code on multiple page. We could create a separate file and include it every time, but there is a better solution.
+When we have a menu, we will want to be able to reuse the same code on multiple pages. We could create a separate file and include it every time, but there is a better solution.
 
 It is more practical to have templates that are able to extend other templates, like a layout for example. Then we can have all the layout related code in a single file and we don't have to include header and footer files in every template.
 
-Sadly our implementation of mustache does not support this. We could write code to work around this, which will take time and could introduce some bugs. Or we could switch to a library that already supports this and is well tested. [Twig](http://twig.sensiolabs.org/) for example.
+Our implementation of mustache does not support this. We could write code to work around this, which will take time and could introduce some bugs. Or we could switch to a library that already supports this and is well tested. [Twig](http://twig.sensiolabs.org/) for example.
 
-Now you might wonder why we didn't start with Twig right away. This is a good example to show why using interfaces and writing loosely-coupled code is a good idea.
+Now you might wonder why we didn't start with Twig right away. Because this is a good example to show why using interfaces and writing loosely-coupled code is a good idea. Like in the real world, the requirements suddenly changed and now our code needs to adapt.
 
 Remember how you created a `MustacheRenderer` in [chapter 9](09-templating.md)? This time, we create a `TwigRenderer` that implements the same interface.
 
-But before we start, install the latest version of Twig with composer.
+But before we start, install the latest version of Twig with composer (`composer require "twig/twig:~1.0"`).
 
 Then create the a `TwigRenderer.php` in your `src/Template` folder that looks like this:
 
 ```php 
-<?php
+<?php declare(strict_types = 1);
 
 namespace Example\Template;
 
@@ -36,7 +36,7 @@ class TwigRenderer implements Renderer
         $this->renderer = $renderer;
     }
 
-    public function render($template, $data = [])
+    public function render($template, $data = []) : string
     {
         return $this->renderer->render("$template.html", $data);
     }
@@ -48,7 +48,7 @@ As you can see, on the render function call a `.html` is added. This is because 
 Add the following code to your `Dependencies.php` file: 
 
 ```php
-$injector->delegate('Twig_Environment', function() use ($injector) {
+$injector->delegate('Twig_Environment', function () use ($injector) {
     $loader = new Twig_Loader_Filesystem(dirname(__DIR__) . '/templates');
     $twig = new Twig_Environment($loader);
     return $twig;
@@ -123,7 +123,7 @@ We could create a global variable that is usable by all templates, but that is n
 So instead we will use a custom renderer for the frontend. First we create an empty interface that extends the existing `Renderer` interface. 
 
 ```php
-<?php
+<?php declare(strict_types = 1);
 
 namespace Example\Template;
 
@@ -136,7 +136,7 @@ Now of course we also need a class that implements the new interface.
 
 
 ```php
-<?php
+<?php declare(strict_types = 1);
 
 namespace Example\Template;
 
@@ -149,7 +149,7 @@ class FrontendTwigRenderer implements FrontendRenderer
         $this->renderer = $renderer;
     }
 
-    public function render($template, $data = [])
+    public function render($template, $data = []) : string
     {
         $data = array_merge($data, [
             'menuItems' => [['href' => '/', 'text' => 'Homepage']],
@@ -184,26 +184,26 @@ Right now the menu is defined in the array, but it is very likely that this will
 So let's do the right thing here and start with an interface again. But first, create a new folder in the `src` directory for the menu related things. `Menu` sounds like a reasonable name, doesn't it?
 
 ```php
-<?php
+<?php declare(strict_types = 1);
 
 namespace Example\Menu;
 
 interface MenuReader
 {
-    public function readMenu();
+    public function readMenu() : array;
 }
 ```
 
 And our very simple implementation will look like this:
 
 ```php
-<?php
+<?php declare(strict_types = 1);
 
 namespace Example\Menu;
 
 class ArrayMenuReader implements MenuReader
 {
-    public function readMenu()
+    public function readMenu() : array
     {
         return [
             ['href' => '/', 'text' => 'Homepage'],
@@ -228,7 +228,7 @@ Now you need to change out the hardcoded array in the `FrontendTwigRenderer` cla
 Did you finish it or did you get stuck? Or are you just lazy? Doesn't matter, here is a working solution:
 
 ```php
-<?php
+<?php declare(strict_types = 1);
 
 namespace Example\Template;
 
@@ -245,7 +245,7 @@ class FrontendTwigRenderer implements FrontendRenderer
         $this->menuReader = $menuReader;
     }
 
-    public function render($template, $data = [])
+    public function render($template, $data = []) : string
     {
         $data = array_merge($data, [
             'menuItems' => $this->menuReader->readMenu(),
